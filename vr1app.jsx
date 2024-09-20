@@ -1,144 +1,80 @@
-import React, { useState } from 'react';
-
-const App = () => {
-  const [activeTab, setActiveTab] = useState('home');
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const handleTabChange = (tab: string) => {
-    setActiveTab(tab);
-  };
-
-  const handleContactFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setContactForm({ ...contactForm, [e.target.name]: e.target.value });
-  };
-
-  const handleContactFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(contactForm);
-    setContactForm({
-      name: '',
-      email: '',
-      message: '',
-    });
-  };
-
-  return (
-    <div className="max-w-7xl mx-auto p-4 md:p-6 lg:p-8">
-      <header className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl font-bold text-blue-600">VR1 IT Solutions</h1>
-        <nav>
-          <ul className="flex space-x-4">
-            <li>
-              <button
-                className={`text-lg ${activeTab === 'home' ? 'text-blue-600' : 'text-gray-600'}`}
-                onClick={() => handleTabChange('home')}
-              >
-                Home
-              </button>
-            </li>
-            <li>
-              <button
-                className={`text-lg ${activeTab === 'services' ? 'text-blue-600' : 'text-gray-600'}`}
-                onClick={() => handleTabChange('services')}
-              >
-                Services
-              </button>
-            </li>
-            <li>
-              <button
-                className={`text-lg ${activeTab === 'contact' ? 'text-blue-600' : 'text-gray-600'}`}
-                onClick={() => handleTabChange('contact')}
-              >
-                Contact
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      {activeTab === 'home' && (
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Welcome to VR1 IT Solutions</h2>
-          <p className="text-lg text-gray-600">
-            We are a software company that provides innovative solutions to businesses and individuals.
-          </p>
-        </section>
-      )}
-      {activeTab === 'services' && (
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Our Services</h2>
-          <ul className="space-y-4">
-            <li>
-              <h3 className="text-lg font-bold text-gray-600">Software Development</h3>
-              <p className="text-lg text-gray-600">
-                We develop custom software solutions that meet the needs of our clients.
-              </p>
-            </li>
-            <li>
-              <h3 className="text-lg font-bold text-gray-600">IT Consulting</h3>
-              <p className="text-lg text-gray-600">
-                We provide expert IT consulting services to help businesses improve their technology infrastructure.
-              </p>
-            </li>
-          </ul>
-        </section>
-      )}
-      {activeTab === 'contact' && (
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Get in Touch</h2>
-          <form onSubmit={handleContactFormSubmit}>
-            <div className="mb-4">
-              <label className="block text-lg font-bold text-gray-600 mb-2" htmlFor="name">
-                Name
-              </label>
-              <input
-                className="block w-full p-2 text-lg text-gray-600 border border-gray-300 rounded"
-                type="text"
-                id="name"
-                name="name"
-                value={contactForm.name}
-                onChange={handleContactFormChange}
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-lg font-bold text-gray-600 mb-2" htmlFor="email">
-                Email
-              </label>
-              <input
-                className="block w-full p-2 text-lg text-gray-600 border border-gray-300 rounded"
-                type="email"
-                id="email"
-                name="email"
-                value={contactForm.email}
-                onChange={handleContactFormChange}
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-lg font-bold text-gray-600 mb-2" htmlFor="message">
-                Message
-              </label>
-              <textarea
-                className="block w-full p-2 text-lg text-gray-600 border border-gray-300 rounded"
-                id="message"
-                name="message"
-                value={contactForm.message}
-                onChange={handleContactFormChange}
-              />
-            </div>
-            <button
-              className="bg-blue-600 text-lg text-white py-2 px-4 rounded hover:bg-blue-700"
-              type="submit"
-            >
-              Send Message
-            </button>
-          </form>
-        </section>
-      )}
-    </div>
-  );
-};
-
-export default App;
+import java.util.Scanner;
+public class App {
+   private String activeTab = "home";
+   private ContactForm contactForm = new ContactForm();
+   public static void main(String[] args) {
+       App app = new App();
+       app.run();
+   }
+   public void run() {
+       Scanner scanner = new Scanner(System.in);
+       while (true) {
+           showMenu();
+           String input = scanner.nextLine();
+           if (input.equalsIgnoreCase("exit")) {
+               break;
+           } else if (input.equalsIgnoreCase("home")) {
+               activeTab = "home";
+               showHome();
+           } else if (input.equalsIgnoreCase("services")) {
+               activeTab = "services";
+               showServices();
+           } else if (input.equalsIgnoreCase("contact")) {
+               activeTab = "contact";
+               showContactForm(scanner);
+           } else {
+               System.out.println("Invalid option. Try again.");
+           }
+       }
+       scanner.close();
+   }
+   private void showMenu() {
+       System.out.println("\nSelect a tab: home, services, contact, or type 'exit' to quit.");
+   }
+   private void showHome() {
+       System.out.println("\nWelcome to VR1 IT Solutions");
+       System.out.println("We are a software company that provides innovative solutions to businesses and individuals.");
+   }
+   private void showServices() {
+       System.out.println("\nOur Services:");
+       System.out.println("1. Software Development");
+       System.out.println("   We develop custom software solutions that meet the needs of our clients.");
+       System.out.println("2. IT Consulting");
+       System.out.println("   We provide expert IT consulting services to help businesses improve their technology infrastructure.");
+   }
+   private void showContactForm(Scanner scanner) {
+       System.out.println("\nGet in Touch");
+       System.out.print("Name: ");
+       contactForm.setName(scanner.nextLine());
+       System.out.print("Email: ");
+       contactForm.setEmail(scanner.nextLine());
+       System.out.print("Message: ");
+       contactForm.setMessage(scanner.nextLine());
+       System.out.println("Contact Form Submitted:");
+       System.out.println(contactForm);
+       contactForm.clear();
+   }
+   private class ContactForm {
+       private String name;
+       private String email;
+       private String message;
+       public void setName(String name) {
+           this.name = name;
+       }
+       public void setEmail(String email) {
+           this.email = email;
+       }
+       public void setMessage(String message) {
+           this.message = message;
+       }
+       public void clear() {
+           this.name = "";
+           this.email = "";
+           this.message = "";
+       }
+       @Override
+       public String toString() {
+           return "Name: " + name + "\nEmail: " + email + "\nMessage: " + message;
+       }
+   }
+}
