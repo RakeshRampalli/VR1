@@ -2,7 +2,7 @@ pipeline {
    agent any
    environment {
        // Set environment variables
-       SONARQUBE_URL = 'http://localhost:9000'
+       SONARQUBE_URL = 'http://SonarQube:9000'
        SONARQUBE_CREDENTIALS = 'sonar-token' // You get this from Jenkins credentials
    }
    stages {
