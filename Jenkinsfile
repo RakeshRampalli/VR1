@@ -2,7 +2,7 @@ pipeline {
    agent any
    environment {
        SONARQUBE_URL = 'http://192.168.9.103:9000' // Replace localhost with correct IP if needed
-       SONARQUBE_CREDENTIALS = 'sonar-token'   // Jenkins stored token ID
+       SONARQUBE_CREDENTIALS = 'sqa_aaa26a4e0d68d7ac0302ebbb0f950cf60e0af6aa'   // Jenkins stored token ID
    }
    stages {
        stage('Clone repository') {
