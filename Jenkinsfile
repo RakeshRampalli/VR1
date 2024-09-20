@@ -4,9 +4,9 @@ pipeline {
 
     environment {
 
-        SONARQUBE_URL = 'http://192.168.9.103:9000' // Replace localhost with correct IP if needed
+        SONARQUBE_URL = 'http://localhost:9000' // Replace localhost with correct IP if needed
 
-        SONARQUBE_CREDENTIALS = 'sqa_aaa26a4e0d68d7ac0302ebbb0f950cf60e0af6aa' // Jenkins stored token ID
+        SONARQUBE_CREDENTIALS = 'sqa_f9b4e8d5cdfea0a13dd95e880b3e1bfceae5908b' // Jenkins stored token ID
 
     }
 
