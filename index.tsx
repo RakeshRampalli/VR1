@@ -10,5 +10,3 @@ root.render(
     <App />
   </StrictMode>
 );
-#Hellothere
-#This_is_rakesh
